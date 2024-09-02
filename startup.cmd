@@ -1,0 +1,1 @@
+start /min PowerShell -noexit "%USERPROFILE%\Desktop\ozontracking\startup.ps1" 
