@@ -100,8 +100,8 @@ def main():
 
             prev_prices = [int(i) for i in prev_prices]
 
-            if len(prev_prices)!=0 and price< (sum(prev_prices)/len(prev_prices))*0.95:
-                message=f'price is now {price} on url {url}, that is {int((sum(prev_prices)/len(prev_prices))/price*100)}% less than average'
+            if len(prev_prices)!=0 and price < (sum(prev_prices)/len(prev_prices))*0.95:
+                message=f'price is now {price} on url {url}, that is {100-int(price/(sum(prev_prices)/len(prev_prices))*100)}% less than average'
                 bot.send_message(conf.chat_id, message, parse_mode='Markdown')
 
         end_time = int(time.time())
@@ -139,5 +139,8 @@ with open(join(dirname, 'chatid.txt'), 'r+') as f:
         bot.infinity_polling()
     else:
         conf.chat_id = int(chatid)
+        text = f"бот авторизован, сбор информации начат по товарам {'\n\n'.join(URLS)}"
+        click.secho(text,  fg='green')
+        bot.send_message(conf.chat_id, text, parse_mode="Markdown")
         main()
 
